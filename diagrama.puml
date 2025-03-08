@@ -1,0 +1,132 @@
+@startuml Diagrama
+
+class VideoJuegoCuphead{
+    - SelectorDeDificultad selectordedificultad
+    - Jugador jugadores[2]
+    - Protagonista protagonistas[2]
+    - Mapa mapas[3]
+}
+class Jugador
+class Diablo
+class Contrato{
+    + ():PagarDeuda
+}
+class Enemigo{
+    + Atacar()
+    + ():ObtenerContrato
+}
+class Nivel{
+    - Enemigo enemigos[]
+}
+class JefeFinal
+class Ayudante
+class Mapa{
+    - Nivel niveles[]
+}
+class Rojo
+class Azul
+class Blanco
+class Negro
+class SelectorDeDificultad{
+    + Seleccionar(Dificultad)
+    - Dificultad facil
+    - Dificultad normal
+}
+class Dificultad
+class Normal
+class Facil
+class Moneda{
+    + Gastar()
+}
+class Vida{
+    + Sobrevivir
+}
+class PocionEspecial
+class Disparo
+class Protagonista{
+    + Mover(Direccion)
+    + Disparar()
+    + Saltar()
+    + Utilizar(HabilidadEspecial)
+    - Vida vidas[3]
+}
+class Avion{
+    + Mover(Direccion)
+    + Disparar()
+}
+class Cuphead{
+    - Color rojo
+    - Color negro
+    - Color blanco
+}
+class Mugman{
+    - Color azul
+    - Color negro
+    - Color blanco
+}
+
+class HabilidadEspecial{
+    + Seleccionar(TipoDeHabilidad)
+    + Activar()
+    + Atacar()
+}
+class Turbo
+class Parry
+class Tienda{
+    + Comprar(Moneda)
+    + ():ObtenerPoderes
+}
+
+
+Jugador "1" o-- "1" Protagonista
+
+VideoJuegoCuphead "1" *-- "2" Protagonista
+VideoJuegoCuphead "1" *-- "1" SelectorDeDificultad
+VideoJuegoCuphead "1" *-- "3" Mapa
+VideoJuegoCuphead "1" *-- "1,2" Jugador
+
+SelectorDeDificultad "1" *-- "2" Dificultad
+
+Normal -|> Dificultad
+Facil -|> Dificultad
+
+Mapa "1" *-- "*" Nivel
+Nivel "1" *-- "*" Enemigo
+JefeFinal "1" *-- "1" Contrato
+
+Diablo -|> JefeFinal
+
+JefeFinal -|> Enemigo
+JefeFinal "1" *-- "*" Ayudante
+Enemigo "1" o-- "1..7" HabilidadEspecial
+
+Ayudante -|> Enemigo
+
+Protagonista "1" o-- "*" Enemigo
+Protagonista "1" o-- "*" Moneda
+Protagonista "1" o-- "1" Avion
+Protagonista "1" o-- "*" Contrato
+Protagonista "1" o-- "1" Tienda
+Jugador "1" o-- "1" SelectorDeDificultad
+
+Rojo -|> Color
+Azul -|> Color
+Blanco -|> Color
+Negro -|> Color
+
+
+Mugman -|> Protagonista
+Protagonista "1" o-- "*" HabilidadEspecial
+Protagonista "1" o-- "*" Disparo
+Mugman "1" *-- "*" Color
+
+Cuphead -|> Protagonista
+Cuphead "1" *-- "*" Color
+Protagonista "1" *-- "3" Vida
+
+PocionEspecial -|> HabilidadEspecial
+Turbo -|> HabilidadEspecial
+Parry -|> HabilidadEspecial
+
+
+@enduml
