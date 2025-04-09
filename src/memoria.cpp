@@ -11,6 +11,9 @@ public:
         encendido = true;
         otro = true;
     }
+    void Ejecutar(){
+        cout<<"Ejecutando Chorizo"<<endl;
+    }
 };
 
 int main(int argc, char const *argv[])
@@ -102,6 +105,12 @@ int main(int argc, char const *argv[])
     // C++
     Chorizo* punteroCXX = new Chorizo();
     delete punteroCXX;
+
+    // Indireccion vs operador ->
+
+    (*punteroCXX).Ejecutar(); //Indicreccion
+
+    punteroCXX->Ejecutar(); // Operador "direccion de memoria"->"accion"
 
     return 0;
 }
